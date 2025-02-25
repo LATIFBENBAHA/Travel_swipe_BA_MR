@@ -4,19 +4,22 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "destinations")
 public class Destination {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long destinationId;
 
     private String nom;
     private String pays;
+    private String type;
+    private double latitude;
+    private double longitude;
     private String description;
+
+    @OneToOne(mappedBy = "destination", cascade = CascadeType.ALL)
+    private Carte carte;
 
     @OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
     private List<Activite> activites;
-
-    public Destination() {}
-
-    // Getters et Setters
 }

@@ -3,17 +3,15 @@ package com.travel.swipe.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "activites")
-public class Activite {
+@Table(name = "cartes")
+public class Carte {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long activiteId;
+    private Long carteId;
 
-    private String nom;
-    private String description;
+    private String urlCarte;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
 }
-

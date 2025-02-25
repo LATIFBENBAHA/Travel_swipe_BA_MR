@@ -3,14 +3,14 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long userId;
 
-    private String username;
+    private String nom;
     private String email;
-    private String password;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Favoris> favoris;
@@ -18,7 +18,9 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Recherche> recherches;
 
-    public User() {}
+    public void setNom(String nom) {
+    }
 
-    // Getters et Setters
+    public void setEmail(String email) {
+    }
 }

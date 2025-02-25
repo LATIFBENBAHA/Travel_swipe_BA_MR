@@ -3,10 +3,11 @@ package com.travel.swipe.model;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "favoris")
 public class Favoris {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long favoriId;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -15,8 +16,4 @@ public class Favoris {
     @ManyToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
-
-    public Favoris() {}
-
-    // Getters et Setters
 }
