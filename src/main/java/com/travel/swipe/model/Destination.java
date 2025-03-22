@@ -31,6 +31,18 @@ public class Destination {
         return destinationId;
     }
 
+    public void setDestinationId(Long destinationId) {
+        this.destinationId = destinationId;
+    }
+
+    public void setActivites(List<Activite> activites) {
+        this.activites = activites;
+    }
+
+    public void setCarte(Carte carte) {
+        this.carte = carte;
+    }
+
     public Carte getCarte() {
         return carte;
     }

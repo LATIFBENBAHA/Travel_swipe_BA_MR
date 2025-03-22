@@ -16,8 +16,14 @@ public class Activite {
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    public Long getId() { return activiteId; }
-    public void setId(Long id) { this.activiteId = id; }
+    public Long getActiviteId() {
+        return activiteId;
+    }
+
+    public void setActiviteId(Long activiteId) {
+        this.activiteId = activiteId;
+    }
+
     public String getNom() { return nom; }
     public void setNom(String nom) { this.nom = nom; }
     public String getDescription() { return description; }

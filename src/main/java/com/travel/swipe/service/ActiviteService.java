@@ -8,7 +8,7 @@ import java.util.List;
 
 @Service
 public class ActiviteService {
-    private final ActiviteRepository activiteRepository;
+    private  ActiviteRepository activiteRepository;
 
     @Autowired
     public ActiviteService(ActiviteRepository activiteRepository) {
@@ -16,6 +16,6 @@ public class ActiviteService {
     }
 
     public List<Activite> getActivitesByDestination(Long destinationId) {
-        return activiteRepository.findByDestinationId(destinationId);
+        return activiteRepository.findByDestination_DestinationId(destinationId);
     }
 }
