@@ -15,5 +15,14 @@ public class Activite {
     @ManyToOne
     @JoinColumn(name = "destination_id")
     private Destination destination;
+
+    public Long getId() { return activiteId; }
+    public void setId(Long id) { this.activiteId = id; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    public Destination getDestination() { return destination; }
+    public void setDestination(Destination destination) { this.destination = destination; }
 }
 

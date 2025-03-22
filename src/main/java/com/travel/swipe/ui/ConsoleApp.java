@@ -1,12 +1,28 @@
-import com.travel.swipe.model.User;
-import com.travel.swipe.service.UserService;
+package com.travel.swipe.ui;
 
+import com.travel.swipe.model.Destination;
+import com.travel.swipe.model.User;
+import com.travel.swipe.service.DestinationService;
+import com.travel.swipe.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import java.util.List;
 import java.util.Scanner;
 
+@Component
 public class ConsoleApp {
+    private final DestinationService destinationService;
+    private final UserService userService;
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static void main(String[] args) {
+    @Autowired
+    public ConsoleApp(DestinationService destinationService, UserService userService) {
+        this.destinationService = destinationService;
+        this.userService = userService;
+    }
+
+    public void run() {
         System.out.println("Bienvenue sur TravelSwipe !");
         while (true) {
             System.out.println("1. Ajouter un utilisateur");
@@ -31,7 +47,7 @@ public class ConsoleApp {
         }
     }
 
-    private static void ajouterUtilisateur() {
+    private void ajouterUtilisateur() {
         System.out.print("Nom : ");
         String nom = scanner.nextLine();
         System.out.print("Email : ");
@@ -41,17 +57,15 @@ public class ConsoleApp {
         user.setNom(nom);
         user.setEmail(email);
 
-        UserService userService = new UserService();
         userService.saveUser(user);
 
         System.out.println("Utilisateur ajouté !");
     }
 
-    private static void rechercherDestination() {
+    private void rechercherDestination() {
         System.out.print("Type de destination (plage, nature, etc.) : ");
         String type = scanner.nextLine();
 
-        DestinationService destinationService = new DestinationService();
         List<Destination> destinations = destinationService.getDestinationsByType(type);
 
         if (destinations.isEmpty()) {

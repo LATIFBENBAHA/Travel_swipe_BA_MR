@@ -20,8 +20,9 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @PostMapping
-    public User createUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    @PostMapping("/add")
+    public String createUser(@RequestBody User user) {
+        userService.saveUser(user);
+        return  "Utilisateur ajouté avec succès !";
     }
 }

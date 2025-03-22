@@ -18,9 +18,29 @@ public class User {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Recherche> recherches;
 
-    public void setNom(String nom) {
+    public Long getId() { return userId; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { this.nom = nom; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public List<Favoris> getFavoris() {
+        return favoris;
     }
 
-    public void setEmail(String email) {
+    public List<Recherche> getRecherches() {
+        return recherches;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setFavoris(List<Favoris> favoris) {
+        this.favoris = favoris;
+    }
+
+    public void setRecherches(List<Recherche> recherches) {
+        this.recherches = recherches;
     }
 }
