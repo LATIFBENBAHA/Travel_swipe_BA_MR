@@ -1,7 +1,12 @@
 package com.travel.swipe.model;
 
 import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "activites")
 public class Activite {
@@ -13,22 +18,9 @@ public class Activite {
     private String description;
 
     @ManyToOne
+    @JsonIgnore // Évite la récursion infinie
     @JoinColumn(name = "destination_id")
     private Destination destination;
 
-    public Long getActiviteId() {
-        return activiteId;
-    }
-
-    public void setActiviteId(Long activiteId) {
-        this.activiteId = activiteId;
-    }
-
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
-    public Destination getDestination() { return destination; }
-    public void setDestination(Destination destination) { this.destination = destination; }
 }
 
