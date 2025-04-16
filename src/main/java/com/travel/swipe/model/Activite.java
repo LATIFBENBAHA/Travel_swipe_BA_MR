@@ -1,9 +1,12 @@
 package com.travel.swipe.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -12,15 +15,31 @@ import lombok.Setter;
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long activiteId;
+    private Long id;
 
-    private String nom;
+    private String name; // plage, montagne, etc.
     private String description;
+    private String imageUrl; //pour stocker l'image de l'activité
 
-    @ManyToOne
-    @JsonIgnore // Évite la récursion infinie
-    @JoinColumn(name = "destination_id")
-    private Destination destination;
+    @OneToMany
+    @JoinTable(
+            name = "activite_destination",
+            joinColumns = @JoinColumn(name = "activite_id"),
+            inverseJoinColumns = @JoinColumn(name = "destination_id")
+    )
+    @JsonManagedReference
+    private List<Destination> destinations;
 
+
+
+    @Override
+    public String toString() {
+        return "Activite{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", destinations=" + destinations +
+                '}';
+    }
 }
-

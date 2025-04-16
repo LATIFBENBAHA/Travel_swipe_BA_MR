@@ -3,27 +3,32 @@ package com.travel.swipe.config;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import org.springframework.context.annotation.Bean;
+import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Configuration;
 
+import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 @Configuration
 public class FirebaseConfig {
 
-    @Bean
-    public FirebaseApp initializeFirebase() throws IOException {
-        InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("travel-swipe-233bd-firebase-adminsdk-fbsvc-f4fa81520e.json");
+    @PostConstruct
+    public void init() {
+        try {
+            FileInputStream serviceAccount = new FileInputStream("src/main/resources/firebase-service-account.json");
 
-        if (serviceAccount == null) {
-            throw new IllegalStateException("Fichier de clé Firebase introuvable !");
+            FirebaseOptions options = new FirebaseOptions.Builder()
+                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .build();
+
+            if (FirebaseApp.getApps().isEmpty()) {
+                FirebaseApp.initializeApp(options);
+            }
+
+            System.out.println("✅ Firebase initialized");
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        FirebaseOptions options = new FirebaseOptions.Builder()
-                .setCredentials(GoogleCredentials.fromStream(serviceAccount))
-                .build();
-
-        return FirebaseApp.initializeApp(options);
     }
 }

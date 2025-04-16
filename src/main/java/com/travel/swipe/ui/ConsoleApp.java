@@ -1,8 +1,12 @@
 package com.travel.swipe.ui;
 
+import com.travel.swipe.model.Activite;
 import com.travel.swipe.model.Destination;
+import com.travel.swipe.model.FavorisActivite;
 import com.travel.swipe.model.User;
-import com.travel.swipe.service.DestinationService;
+import com.travel.swipe.repository.ActiviteRepository;
+import com.travel.swipe.service.ActiviteService;
+import com.travel.swipe.service.FavorisActiviteService;
 import com.travel.swipe.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -12,14 +16,17 @@ import java.util.Scanner;
 
 @Component
 public class ConsoleApp {
-    private final DestinationService destinationService;
+//    private final DestinationService destinationService;
+    private final ActiviteService activiteService;
     private final UserService userService;
+    private FavorisActiviteService favorisActiviteService;
     private static final Scanner scanner = new Scanner(System.in);
 
     @Autowired
-    public ConsoleApp(DestinationService destinationService, UserService userService) {
-        this.destinationService = destinationService;
+    public ConsoleApp(ActiviteService activiteService, UserService userService,FavorisActiviteService favorisActiviteService) {
+        this.activiteService= activiteService;
         this.userService = userService;
+        this.favorisActiviteService = favorisActiviteService;
     }
 
     public void run() {
@@ -36,7 +43,7 @@ public class ConsoleApp {
                     ajouterUtilisateur();
                     break;
                 case 2:
-                    rechercherDestination();
+                    rechercherActivite();
                     break;
                 case 3:
                     System.out.println("Au revoir !");
@@ -52,28 +59,44 @@ public class ConsoleApp {
         String nom = scanner.nextLine();
         System.out.print("Email : ");
         String email = scanner.nextLine();
+        System.out.print("password : ");
+        String password = scanner.nextLine();
 
         User user = new User();
-        user.setNom(nom);
+        user.setName(nom);
         user.setEmail(email);
+        user.setMotdepass(password);
 
         userService.saveUser(user);
 
         System.out.println("Utilisateur ajouté !");
     }
 
-    private void rechercherDestination() {
-        System.out.print("Type de destination (plage, nature, etc.) : ");
-        String type = scanner.nextLine();
+    private void rechercherActivite() {
+        List<Activite> activites=activiteService.getAllActivites();
+        for (Activite act : activites){
+            System.out.print("do you like :"+act.getName()+"\n");
+            String choice = scanner.nextLine();
+            if (choice.equalsIgnoreCase("Y")) {
 
-        List<Destination> destinations = destinationService.getDestinationsByType(type);
-
-        if (destinations.isEmpty()) {
-            System.out.println("Aucune destination trouvée.");
-        } else {
-            for (Destination dest : destinations) {
-                System.out.println(dest.getNom() + " - " + dest.getPays());
+                favorisActiviteService.likerActivite(1L,act.getId());
             }
         }
+//        System.out.print("do you like :"+);
+//        String choice = scanner.nextLine();
+//        if (choice.equals('Y')){
+//
+//        }
+//        Activite activites = activiteService.getActiviteByname(name);
+//
+//        List<Destination> destinations = destinationService.getDestinationsByType(type);
+//
+//        if (activites.equals(null)) {
+//            System.out.println("Aucune activite trouvée.");
+//        } else {
+//            for (Destination dest : destinations) {
+//                System.out.println(dest.getNom() + " - " + dest.getPays());
+//            }
+//        }
     }
 }

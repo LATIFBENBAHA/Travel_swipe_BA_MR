@@ -1,47 +1,47 @@
 package com.travel.swipe.controller;
 
 import com.travel.swipe.model.Activite;
+import com.travel.swipe.model.Destination;
+import com.travel.swipe.repository.ActiviteRepository;
 import com.travel.swipe.service.ActiviteService;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
+
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
-@RequestMapping("/activites")
+@RequestMapping("/api/activites")
 public class ActiviteController {
+    @Autowired
+    private ActiviteService activiteService;
 
-    private final ActiviteService activiteService;
+    @Autowired
+    private ActiviteRepository activiteRepository;
 
-    public ActiviteController(ActiviteService activiteService) {
-        this.activiteService = activiteService;
-    }
-
-
-    @GetMapping("/destination/{destinationId}")
-    public List<Activite> getActivitesByDestination(@PathVariable Long destinationId) {
-        return activiteService.getActivitesByDestinationId(destinationId);
-    }
     @GetMapping
     public List<Activite> getAllActivites() {
         return activiteService.getAllActivites();
     }
 
+    @PostMapping("/activite-destination")
+    public String lier(@RequestBody Map<String, Long> body) {
+        Long activiteId = body.get("activiteId");
+        Long destinationId = body.get("destinationId");
+
+        activiteService.lierActiviteEtDestination(activiteId, destinationId);
+        return "Lien ajouté avec succès !";
+    }
+    // Méthode pour obtenir une activité par ID
     @GetMapping("/{id}")
-    public Activite getActiviteById(@PathVariable Long id) {
-        return activiteService.getActiviteById(id);
-    }
-    @PostMapping
-    public Activite createActivite(@RequestBody Activite activite) {
-        return activiteService.saveActivite(activite);
+    public ResponseEntity<Activite> getActivite(@PathVariable Long id) {
+        Activite activite = activiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Activité non trouvée"));
+        return ResponseEntity.ok(activite);
     }
 
-    @PutMapping("/{id}")
-    public Activite updateActivite(@PathVariable Long id, @RequestBody Activite activite) {
-        return activiteService.updateActivite(id, activite);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteActivite(@PathVariable Long id) {
-        activiteService.deleteActivite(id);
-    }
 }

@@ -2,8 +2,12 @@ package com.travel.swipe.repository;
 
 import com.travel.swipe.model.Activite;
 import org.springframework.data.jpa.repository.JpaRepository;
-import java.util.List;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Optional;
+@Repository
 public interface ActiviteRepository extends JpaRepository<Activite, Long> {
-    List<Activite> findByDestination_DestinationId(Long destinationId);
+    Optional<Activite> findById(Long ActiviteId);
+//    Activite findByname(String name);
 }
