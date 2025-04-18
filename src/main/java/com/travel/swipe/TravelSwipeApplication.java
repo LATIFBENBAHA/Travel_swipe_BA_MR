@@ -11,7 +11,6 @@ public class TravelSwipeApplication {
 
 	public static void main(String[] args) {
 		ApplicationContext context = SpringApplication.run(TravelSwipeApplication.class, args);
-		System.out.println("Firebase Apps: " + FirebaseApp.getApps());
 		ConsoleApp app = context.getBean(ConsoleApp.class);
 		app.run();
 	}

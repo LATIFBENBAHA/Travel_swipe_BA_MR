@@ -28,11 +28,6 @@ public class FavorisActiviteController {
         Long userId = data.get("userId");
         Long activiteId = data.get("activiteId");
         favorisActiviteService.likerActivite(userId,activiteId);
-//        // Ajoute les destinations liées à cette activité dans le buffer
-//        List<Destination> destinationsLiees = destinationService.getDestinationsByActiviteId(activiteId);
-//        for (Destination d : destinationsLiees) {
-//            destinationBufferService.addDestination(d);
-//        }
         return ResponseEntity.ok().build();
     }
     @PostMapping("/dislike")

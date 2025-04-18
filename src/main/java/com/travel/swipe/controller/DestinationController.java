@@ -54,10 +54,5 @@ public class DestinationController {
 
 
 
+
 }
-//    // Réinitialiser les destinations (pour un nouveau cycle)
-//    @PostMapping("/reset")
-//    public ResponseEntity<Void> resetDestinations() {
-//        destinationBufferService.reset();
-//        return ResponseEntity.ok().build();
-//    }

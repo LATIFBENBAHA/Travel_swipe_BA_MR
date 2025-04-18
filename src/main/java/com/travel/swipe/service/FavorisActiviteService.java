@@ -50,14 +50,6 @@ public class FavorisActiviteService {
             favorisActivite.add(activite);
             favorisActiviteRepository.save(favorisActivite);
 
-            // Enregistrement dans Firebase (décommenter si prêt)
-        /*
-        Firestore firestore = FirestoreClient.getFirestore();
-        Map<String, Object> data = new HashMap<>();
-        data.put("userId", user.getId());
-        data.put("activiteId", activite.getId());
-        firestore.collection("favorisactivites").add(data);
-        */
         }
     }
     public void unlikerActivite(Long userId, Long activiteId) {

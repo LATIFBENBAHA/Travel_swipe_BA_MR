@@ -3,7 +3,11 @@ package com.travel.swipe.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,13 +25,14 @@ public class Destination {
     private String description;
     private String imageUrl; // pour stocker l'image de la destinat
 
-    @ManyToOne
-    @JoinTable(
-            name = "activite_destination",
-            joinColumns = @JoinColumn(name = "destination_id"),
-            inverseJoinColumns = @JoinColumn(name = "activite_id")
-    )
-//    @JsonIgnore
-    @JsonBackReference
-    private Activite activite;
+
+////    @JoinTable(
+////            name = "activite_destination",
+////            joinColumns = @JoinColumn(name = "destination_id"),
+////            inverseJoinColumns = @JoinColumn(name = "activite_id")
+////    )
+//////    @JsonIgnore
+////    @JsonBackReference
+    @ManyToMany(mappedBy = "destinations")
+    private Set<Activite> activites = new HashSet<>();
 }
