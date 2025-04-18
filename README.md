@@ -61,7 +61,7 @@ CREATE USER admin WITH PASSWORD 'yourpassword';//vous devez changer le mot de pa
 GRANT ALL PRIVILEGES ON DATABASE travelswipe TO admin;
 
 Importer les données :
-'psql -U admin -d travelswipe -f data_travelswipe.sql'
+'psql -U admin -d travelswipe -f data_travelswipe.sql' (Vous trouverez l'email et le mot de passe dans ce fichier. Vous pouvez les modifier, en ajouter d'autres, etc.)
 
 ### 3. 🔙 Lancer le backend Spring Boot
 Depuis le dossier backend :
