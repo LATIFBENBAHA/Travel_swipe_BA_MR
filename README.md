@@ -53,8 +53,11 @@ git clone https://github.com/LATIFBENBAHA/Travel_swipe_BA_MR.git
 cd Travel_swipe_BA_MR
 ### 2. 🐘 Configurer PostgreSQL
 psql -U postgres
+
 CREATE DATABASE travelswipe;
+
 CREATE USER admin WITH PASSWORD 'yourpassword';//vous devez changer le mot de pass dans application.properties 
+
 GRANT ALL PRIVILEGES ON DATABASE travelswipe TO admin;
 
 Importer les données :
