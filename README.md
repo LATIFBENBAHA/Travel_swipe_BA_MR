@@ -2,8 +2,8 @@
 
 > Projet universitaire - Master MIAGE Lyon 1  
 > Par : Abdellatif BENBAHA & Rafiq MAHROUG  
-> 🔗 [GitHub Repository](https://github.com/LATIFBENBAHA/Travel_swipe_BA_MR.git)
-pour le dossier frond-end angular :
+> 🔗 [GitHub Repository](https://github.com/LATIFBENBAHA/Travel_swipe_BA_MR.git).
+pour le dossier frond-end angular : [GitHub Repository](https://github.com/LATIFBENBAHA/travelswipe-front-end.git).
 
 
 ---
