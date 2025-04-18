@@ -3,10 +3,10 @@ INSERT INTO users (name, email, motdepass)
 VALUES ('Latif Benbaha', 'latif@test.com', '123456');
 
 -- Ajout d'activités
-INSERT INTO activites (id, name, description) VALUES
-                                                 (1, 'Plage', 'Profiter du soleil et de la mer'),
-                                                 (2, 'Randonnée', 'Marcher dans la nature'),
-                                                 (3, 'Ski', 'Descente sur les pistes enneigées');
+INSERT INTO activites (id, name, description, image_url) VALUES
+                                                 (1, 'Plage', 'Profiter du soleil et de la mer',''),
+                                                 (2, 'Randonnée', 'Marcher dans la nature',''),
+                                                 (3, 'Ski', 'Descente sur les pistes enneigées','');
 
 -- Ajout de destinations
 INSERT INTO destinations (id, name, description, image_url) VALUES
